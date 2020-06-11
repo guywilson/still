@@ -8,6 +8,15 @@
 
 #include "version.h"
 
+void handleSignal(int sigNum)
+{
+	switch (sigNum) {
+		case SIGUSR1:
+            printf("Got capture signal...\n");
+			return;
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	char *			pszAppName;
@@ -30,6 +39,11 @@ int main(int argc, char *argv[])
 		}
 
         printf("\n\n");
+	}
+
+	if (signal(SIGUSR1, &handleSignal) == SIG_ERR) {
+		printf("Failed to register signal handler for SIGUSR1");
+		return -1;
 	}
 
     while (1) {
