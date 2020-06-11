@@ -12,7 +12,7 @@ void handleSignal(int sigNum)
 {
 	switch (sigNum) {
 		case SIGUSR1:
-            printf("Got capture signal...\n");
+            fprintf(stderr, "Got capture signal...\n");
 			return;
 	}
 }
@@ -25,24 +25,24 @@ int main(int argc, char *argv[])
     pszAppName = strdup(argv[0]);
 
 	if (argc > 0) {
-        printf("Got cmdline parameters: ");
+        fprintf(stderr, "Got cmdline parameters: ");
 
 		for (i = 0;i < argc;i++) {
-            printf("%s ", argv[i]);
+            fprintf(stderr, "%s ", argv[i]);
 
 			if (argv[i][0] == '-') {
 				if (strcmp(&argv[i][1], "version") == 0) {
-					printf("%s Version: [%s], Build date: [%s]\n\n", pszAppName, getVersion(), getBuildDate());
+					fprintf(stderr, "%s Version: [%s], Build date: [%s]\n\n", pszAppName, getVersion(), getBuildDate());
 					return 0;
 				}
 			}
 		}
 
-        printf("\n\n");
+        fprintf(stderr, "\n\n");
 	}
 
 	if (signal(SIGUSR1, &handleSignal) == SIG_ERR) {
-		printf("Failed to register signal handler for SIGUSR1");
+		fprintf(stderr, "Failed to register signal handler for SIGUSR1");
 		return -1;
 	}
 

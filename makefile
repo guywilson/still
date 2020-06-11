@@ -22,7 +22,7 @@ TARGET = still
 VBUILD = vbuild
 CPP = g++
 C = gcc
-LINKER = g++
+LINKER = gcc
 
 # postcompile step
 PRECOMPILE = @ mkdir -p $(BUILD) $(DEP)
